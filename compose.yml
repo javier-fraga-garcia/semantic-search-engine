@@ -1,0 +1,17 @@
+services:
+  db:
+    container_name: elasticsearch
+    image: elasticsearch:8.19.4
+    restart: always
+    ports:
+      - 9200:9200
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    volumes:
+      - es_data:/usr/share/elasticsearch/data
+
+volumes:
+  es_data:
+    external: false
